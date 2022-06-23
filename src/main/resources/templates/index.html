@@ -12,25 +12,39 @@
         <p>Telefono: <span th:text="${cliente.telefono}"></span></p>
         <br>
         <br-->
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Apellidos</th>
-                    <th>Correo</th>
-                    <th>Teléfono</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="item : ${clientes}">
-                    <td th:text="${item.idCliente}"></td>
-                    <td th:text="${item.nombre}"></td>
-                    <td th:text="${item.apellidos}"></td>
-                    <td th:text="${item.correo}"></td> 
-                    <td th:text="${item.telefono}"></td>
-                </tr>
-            </tbody>
-        </table>
-
+        <header th:replace="layout/plantilla :: header"></header>
+        <h1>Lista de clientes</h1>
+        <a th:href="@(/nuevoCliente)">Nuevo Cliente</a>
+        <br>
+        <br>
+        <div thif="${clientes != null and !clientes.empty}">
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellidos</th>
+                        <th>Correo</th>
+                        <th>Teléfono</th>
+                        <th>Modificar</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="item : ${clientes}">
+                        <td th:text="${item.idCliente}"></td>
+                        <td th:text="${item.nombre}"></td>
+                        <td th:text="${item.apellidos}"></td>
+                        <td th:text="${item.correo}"></td> 
+                        <td th:text="${item.telefono}"></td>
+                        <td><a th:href="@{/modificarCliente} + ${item.idCliente}">Modificar</a></td>
+                        <td><a th:href="@{/eliminarCliente} + ${item.idCliente}">Eliminar</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div thif="${clientes == null or clientes.empty}">
+            No tenemos lista de clientes para mostrar
+        </div>
+        <footer th:replace="layout/plantilla :: footer"></footer>
     </body>
 </html>
