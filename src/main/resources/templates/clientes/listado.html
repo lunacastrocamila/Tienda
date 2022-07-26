@@ -1,15 +1,44 @@
-<!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
+
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>TechShop</title>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="@{/css/menu.css}" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <div>TODO write content</div>
+        <header th:replace="layout/plantilla :: header"></header>
+        <div class="contenido">
+            <h2>Listado de Clientes</h2>
+            <div thif="${clientes != null and !clientes.empty}">
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Apellidos</th>
+                            <th>Correo</th>
+                            <th>Teléfono</th>
+                            <th>Límite</th>
+                            <th>Modificar</th>
+                            <th>Eliminar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="item : ${clientes}">
+                            <td th:text="${item.nombre}"></td>
+                            <td th:text="${item.apellidos}"></td>
+                            <td th:text="${item.correo}"></td>
+                            <td th:text="${item.telefono}"></td>
+                            <td th:text="${item.credito.limite}"></td>
+                            <td><a href="@{/cliente/modificar} + ${item.idCliente}">Modificar</a></td>
+                            <td><a href="@{/cliente/eliminar} + ${item.idCliente}">Eliminar</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div thif="${clientes == null or clientes.empty}">
+                No tenemos lista de clientes para mostrar
+            </div>
+        </div>
+        <footer th:replace="layout/plantilla :: footer"></footer>
     </body>
 </html>

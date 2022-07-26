@@ -1,15 +1,25 @@
-<!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
-<html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
     <head>
-        <title>TODO supply a title</title>
+        <title>Tech Shop</title>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link href="@{/css/menu.css}" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <div>TODO write content</div>
+        <h1>Datos de las categorías</h1>    
+        <a th:href="@{/categoria/listado}">Regresar</a>
+        <br>
+            <form th:action="@{/categoria/guardar}"
+                  method="POST"
+                  th:object="${categoria}">
+                <input type="hidden" name="idArticulo" th:field="*{idCategoria}"/>
+                <label for="nombre">Descripcion: </label>
+                <input type="text" id="descripcion" name="descripcion" th:field="*{descripcion}"/>
+                <br>
+                    <label for="limite">Activo: </label>
+                    <input type="checkbox" id="activo" name="activo" th:field="*{activo}"/>
+                    <br/>
+                    <input type="submit" name="guardar" value="Guardar"/>
+            </form>
     </body>
-</html>

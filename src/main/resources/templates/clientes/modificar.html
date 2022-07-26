@@ -1,15 +1,35 @@
-<!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
-<html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
     <head>
-        <title>TODO supply a title</title>
+        <title>Tech Shop</title>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link href="@{/css/menu.css}" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <div>TODO write content</div>
+        <h1>Datos del cliente</h1>    
+        <a th:href="@{/cliente/listado}">Regresar</a>
+        <br>
+        <br>
+        <form th:action="@{/cliente/guardar}"
+              method="POST"
+              th:object="${cliente}">
+            <input type="hidden" name="idCliente" th:field="*{idCliente}"/>
+            <label for="nombre">Nombre: </label>
+            <input type="text" id="nombre" name="nombre" th:field="*{nombre}"/>
+            <br>
+            <label for="nombre">Apellidos: </label>
+            <input type="text" id="apellidos" name="apellidos" th:field="*{apellidos}"/>
+            <br>
+            <label for="nombre">Correo: </label>
+            <input type="correo" id="correo" name="correo" th:field="*{correo}"/>
+            <br>
+            <label for="nombre">Teléfono: </label>
+            <input type="telefono" id="telefono" name="telefono" th:field="*{telefono}"/>
+            <br>
+            <label for="limite">Limite: </label>
+            <input type="number" id="limite" name="limite" th:field="*{credito.limite}"/>
+            <br/>
+            <input type="submit" name="guardar" value="Guardar"/>
+        </form>
     </body>
-</html>
