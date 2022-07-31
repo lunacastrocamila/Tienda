@@ -1,12 +1,13 @@
 <html xmlns:th="http://www.thymeleaf.org"      
-      xmlns="http://www.w3.org/1999/xhtml">
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head>        
         <title>TechShop</title>        
         <meta charset="UTF-8">    
     </head>
     <body>        
         <header th:fragment="header" class="header">           
-            <nav class="nav">            
+            <nav class="nav" sec:authorize="hasRole('ROLE_VENDEDOR')">            
                 <a th:href="@{/}" class="logo nav-link">TechShop</a>         
                 <ul class="nav-menu">                
                     <li class="nav-menu-item">                  
@@ -22,8 +23,17 @@
                 </ul>        
             </nav>    
         </header>     
-        <footer th:fragment="footer" class="footer">     
-            <p>&COPY; [[#{plantilla.derechos}]]</p>     
+        <footer th:fragment="footer" class="footer">   
+            <div>
+                <p>&COPY; [[#{plantilla.derechos}]]</p> 
+                <a th:ref="@{/(lang=es)}">ES</a> |
+                <a th:ref="@{/(lang=en)}">EN</a> |
+                User: <span sec:authentication="name">xxx</span> |
+                Roles: <span sec:authentication="principal.authorities">xxx</span> |
+                <form method="POST" th:action="@{/logout}" style="display: inline;">
+                    <a href="#" onclick="this.parentNode.submit()">Logout</a>
+                </form>
+            </div>
         </footer> 
     </body>
 </html>
